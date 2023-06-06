@@ -33,4 +33,5 @@ public class Jadwal {
     @JoinColumn(name = "id_city_kedatangan", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private City kotaKedatangan;
+
 }
