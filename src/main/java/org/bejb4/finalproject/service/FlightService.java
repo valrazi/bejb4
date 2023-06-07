@@ -29,6 +29,8 @@ public class FlightService {
     }
     public Flight updateFlight(Long id, Flight flight){
 
+        //VALIDASI
+
         Flight flight1 = flightRepository.findByIdFlight(id).get();
 
         if(flight.getHargaEkonomi() != 0){
