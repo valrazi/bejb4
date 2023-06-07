@@ -28,11 +28,24 @@ public class FlightService {
         return flightRepository.findByIdFlight(idFlight);
     }
     public Flight updateFlight(Long id, Flight flight){
+
         Flight flight1 = flightRepository.findByIdFlight(id).get();
-        flight1.setHargaEkonomi(flight.getHargaEkonomi());
-        flight1.setHargaBisnis(flight.getHargaBisnis());
-        flight1.setJmlKursiEkonomi(flight.getJmlKursiEkonomi());
-        flight1.setJmlKursiBisnis(flight.getJmlKursiBisnis());
+
+        if(flight.getHargaEkonomi() != 0){
+            flight1.setHargaEkonomi(flight.getHargaEkonomi());
+        }
+        if (flight.getHargaBisnis() != 0){
+            flight1.setHargaBisnis(flight.getHargaBisnis());
+        }
+        if (flight.getJmlKursiSeluruh() != 0){
+            flight1.setJmlKursiSeluruh(flight.getJmlKursiSeluruh());
+        }
+        if(flight.getJmlKursiBisnis() !=0){
+            flight1.setJmlKursiBisnis(flight.getJmlKursiBisnis());
+        }
+        if (flight.getJmlKursiEkonomi() != 0){
+            flight1.setJmlKursiEkonomi(flight.getJmlKursiEkonomi());
+        }
         log.info("Update Data Flight By Id Success");
         return flightRepository.save(flight1);
     }

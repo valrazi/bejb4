@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FlightRepository extends JpaRepository<Flight, Long> {
-    @Query("Select f From finalproject WHERE f.idFlight =?1")
     Optional<Flight> findByIdFlight(Long idFlight);
-    @Query("Select f From finalproject WHERE f.maskapai =?1")
-    List<Flight> findByMaskapai(String Maskapai);
+//    List<Flight> findByMaskapai(String Maskapai);
 }

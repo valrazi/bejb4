@@ -24,15 +24,15 @@ public class Flight {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Maskapai maskapai;
 
-    private int jmlKursiSeluruh;
+    private Integer jmlKursiSeluruh;
 
-    private int jmlKursiEkonomi;
+    private Integer jmlKursiEkonomi;
 
-    private int jmlKursiBisnis;
+    private Integer jmlKursiBisnis;
 
-    private int hargaEkonomi;
+    private Integer hargaEkonomi;
 
-    private int hargaBisnis;
+    private Integer hargaBisnis;
 
 
 }

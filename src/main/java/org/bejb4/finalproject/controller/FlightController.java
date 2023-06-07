@@ -15,19 +15,19 @@ import java.util.Optional;
 public class FlightController {
     @Autowired
     private FlightService flightService;
-    @PostMapping("/addFlight")
+    @PostMapping
     public ResponseEntity<Flight> addFlight(@RequestBody Flight flight){
         Flight flight1 = flightService.addFlight(flight);
         return new ResponseEntity<>(flight1, HttpStatus.CREATED);
     }
-    @GetMapping("getAllFlight")
+    @GetMapping()
     public ResponseEntity<List<Flight>> getAllFlight(){
         List<Flight> allFlight = flightService.getAllFlight();
         return ResponseEntity.ok(allFlight);
     }
-    @GetMapping("getFlightById/{flightId}")
-    public ResponseEntity<Flight> getFlightById(@RequestParam("idFlight") Long id){
-        Optional<Flight> flight = flightService.getFlightById(id);
+    @GetMapping("/{idFlight}")
+    public ResponseEntity<Flight> getFlightById(@PathVariable Long idFlight){
+        Optional<Flight> flight = flightService.getFlightById(idFlight);
         if(flight.isPresent()){
             return new ResponseEntity<>(flight.get(), HttpStatus.OK);
         }
@@ -35,13 +35,14 @@ public class FlightController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @PutMapping("/updateFlight")
-    public ResponseEntity<String> updateFlight(@RequestParam(name = "idFlight") Long id, @RequestBody Flight flight){
-        flightService.updateFlight(id, flight);
+    @PutMapping("/{idFlight}")
+    public ResponseEntity<String> updateFlight(@PathVariable Long idFlight, @RequestBody Flight flight){
+        flightService.updateFlight(idFlight, flight);
         return new ResponseEntity<String>("Update Data Flight Done", HttpStatus.OK);
     }
-    public ResponseEntity<String> deleteFlightById(@RequestParam(name = "idFlight") Long id){
-        flightService.deleteFlightById(id);
+    @DeleteMapping("/{idFlight}")
+    public ResponseEntity<String> deleteFlightById(@PathVariable Long idFlight){
+        flightService.deleteFlightById(idFlight);
         return ResponseEntity.ok("Delete Data Flight Done");
     }
 }

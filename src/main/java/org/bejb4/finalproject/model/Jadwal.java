@@ -1,5 +1,6 @@
 package org.bejb4.finalproject.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -17,7 +18,6 @@ public class Jadwal {
     private long idJadwal;
 
     private long noPenerbangan;
-
     private LocalDate tglKeberangkatan;
 
     private LocalTime jamKeberangkatan;
