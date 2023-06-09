@@ -64,6 +64,44 @@ public class JadwalController {
         }
     }
 
+    // Update Data From jadwal
+    @PatchMapping("/updateOptional")
+    public ResponseEntity<MessageModel> updateData(@RequestBody List<Jadwal> param) {
+        MessageModel msg = new MessageModel();
+        try {
+            List<Jadwal> jadwalList = new ArrayList<>();
+            for (Jadwal data : param) {
+                Optional<Jadwal> jadwalOpt = jadwalService.getById(data.getIdJadwal());
+
+                if (jadwalOpt.isPresent()) {
+                    Jadwal jadwal = jadwalOpt.get();
+
+                    jadwal.setNoPenerbangan(data.getNoPenerbangan());
+                    jadwal.setTglKeberangkatan(data.getTglKeberangkatan());
+                    jadwal.setJamKeberangkatan(data.getJamKeberangkatan());
+                    jadwal.setJamKedatangan(data.getJamKedatangan());
+                    jadwal.setKotaKeberangkatan(data.getKotaKedatangan());
+                    jadwal.setKotaKedatangan(data.getKotaKedatangan());
+
+                    jadwalList.add(jadwal);
+                } else {
+                    throw new RuntimeException("Maskapai not found for id : " + data.getIdJadwal());
+                }
+            }
+            jadwalRepository.saveAll(jadwalList);
+
+            msg.setStatus(true);
+            msg.setMessage("Success to updated data..");
+            msg.setData(jadwalList);
+
+            return ResponseEntity.status(HttpStatus.OK).body(msg);
+        } catch (Exception e) {
+            msg.setStatus(false);
+            msg.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg);
+        }
+    }
+
     // Delete (byId) From jadwal
     @DeleteMapping("/delete/{idJadwal}")
     public ResponseEntity<MessageModel> deleteById(@PathVariable("idJadwal") Long idJadwal) {

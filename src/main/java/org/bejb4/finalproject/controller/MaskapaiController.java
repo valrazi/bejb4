@@ -40,7 +40,6 @@ public class MaskapaiController {
             for (Maskapai data : param) {
                 Maskapai maskapai = new Maskapai();
 
-                maskapai.setIdMaskapai(data.getIdMaskapai());
                 maskapai.setNamaMaskapai(data.getNamaMaskapai());
                 maskapai.setLogoMaskapai(data.getLogoMaskapai());
 
@@ -50,6 +49,40 @@ public class MaskapaiController {
 
             msg.setStatus(true);
             msg.setMessage("Success to inserted data..");
+            msg.setData(maskapaiList);
+
+            return ResponseEntity.status(HttpStatus.OK).body(msg);
+        } catch (Exception e) {
+            msg.setStatus(false);
+            msg.setMessage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(msg);
+        }
+    }
+
+    // Update Data From maskapai
+    @PatchMapping("/updateOptional")
+    public ResponseEntity<MessageModel> updateData(@RequestBody List<Maskapai> param) {
+        MessageModel msg = new MessageModel();
+        try {
+            List<Maskapai> maskapaiList = new ArrayList<>();
+            for (Maskapai data : param) {
+                Optional<Maskapai> maskapaiOpt = maskapaiService.getById(data.getIdMaskapai());
+
+                if (maskapaiOpt.isPresent()) {
+                    Maskapai maskapai = maskapaiOpt.get();
+
+                    maskapai.setNamaMaskapai(data.getNamaMaskapai());
+                    maskapai.setLogoMaskapai(data.getLogoMaskapai());
+
+                    maskapaiList.add(maskapai);
+                } else {
+                    throw new RuntimeException("Maskapai not found for id : " + data.getIdMaskapai());
+                }
+            }
+            maskapaiRepository.saveAll(maskapaiList);
+
+            msg.setStatus(true);
+            msg.setMessage("Success to updated data..");
             msg.setData(maskapaiList);
 
             return ResponseEntity.status(HttpStatus.OK).body(msg);
