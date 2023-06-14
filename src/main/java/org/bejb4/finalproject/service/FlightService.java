@@ -2,10 +2,13 @@ package org.bejb4.finalproject.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.bejb4.finalproject.model.Flight;
+import org.bejb4.finalproject.model.Jadwal;
 import org.bejb4.finalproject.repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
