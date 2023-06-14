@@ -19,7 +19,7 @@ public class FlightService {
         log.info("Add data Flight Success");
         return flightRepository.save(flight);
     }
-    public List<Flight> getAllFlight(){
+    public List<Flight> getAllFlight(){//dapatkan semua
         log.info("Get All Data Flight Success");
         return flightRepository.findAll();
     }

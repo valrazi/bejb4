@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 import java.util.Optional;
-
+//rpos
 public interface FlightRepository extends JpaRepository<Flight, Long> {
     Optional<Flight> findByIdFlight(Long idFlight);
 //    List<Flight> findByMaskapai(String Maskapai);
